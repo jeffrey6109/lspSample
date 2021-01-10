@@ -36,13 +36,20 @@
     <hr size=2 width="100%">
 
     <div class="nav-scroller py-1 mb-2 text-center">
-      <nav class="nav d-flex justify-content-between ">
-
+      <nav class="nav d-flex justify-content-center">
+        <ul class="nav nav-tabs">
       @if(isset($_SESSION["name"]))
-        <a class="p-2 link-secondary btn btn-sm btn-outline-info" href="/lsp/public/"><span uk-icon="tag"></span> catalog</a>
-        <a class="p-2 link-secondary btn btn-sm btn-outline-info" href="/lsp/public/products/"><span uk-icon="thumbnails"></span> Product</a>
-        <a class="p-2 link-secondary btn btn-sm btn-outline-info" href="/lsp/public/records/"><span uk-icon="history"></span> Logs</a>
+      <li class="nav-item">
+        <a class=" btn btn-sm btn-light nav-link" aria-current="page" href="/lsp/public/"><span uk-icon="tag"></span> catalog</a>
+      </li>
+      <li class="nav-item">
+        <a class=" btn btn-sm btn-light nav-link" href="/lsp/public/products/"><span uk-icon="thumbnails"></span> Product</a>
+      </li>
+      <li class="nav-item">
+        <a class=" btn btn-sm btn-light nav-link" href="/lsp/public/records/"><span uk-icon="history"></span> Logs</a>
+      </li>
       @endif
+        </ul>
       </nav>
     </div>
   </div>

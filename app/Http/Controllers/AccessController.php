@@ -75,12 +75,12 @@ class AccessController extends Controller
           }
           else
           {
-            $serial = uniqid('lsp',false);
-            $s_no = md5($serial);
+            $charid = strtoupper(md5(uniqid(rand(), true),false));
+            $uuid= substr($charid,1,16);
             $password = $request->input('password');
 
             $user = new User;
-            $user->uuid = $s_no;
+            $user->uuid = $uuid;
             $user->name = $request->input('name');
             $user->email = $request->input('email');
             $user->password = password_hash($password, PASSWORD_BCRYPT);

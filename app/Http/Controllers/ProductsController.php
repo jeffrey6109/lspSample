@@ -80,15 +80,15 @@ class ProductsController extends Controller
             $fileNameToStore = 'noimage.jpg';
         }
 
-        $serial = uniqid('lsp',false);
-        $s_no = md5($serial);
+        $charid = strtoupper(md5(uniqid(rand(), true),false));
+		$uuid= substr($charid,1,16);
         $quantity =$request->input('quantity');
         $purchase_price = $request->input('purchase_price');
 
         //create post
 
         $product = new Product;
-        $product->p_serial_no = $s_no;
+        $product->p_serial_no = $uuid;
         $product->p_name = $request->input('name');
         $product->p_quantity = $quantity;
         $product->p_purchase_price = $purchase_price;
@@ -99,7 +99,7 @@ class ProductsController extends Controller
         $product->save();
 
         $log = new Log;
-        $log->l_p_serial_number = $s_no;
+        $log->l_p_serial_number = $uuid;
         $log->l_p_name = $request->input('name');
         $log->l_action = 'New';
         $log->l_quantity = $quantity;
