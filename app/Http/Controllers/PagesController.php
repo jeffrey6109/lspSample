@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
+
 /**
      * Create a new controller instance.
      *
@@ -30,7 +31,9 @@ class PagesController extends Controller
     public function add($p_id)
     {
         $product = Product::find($p_id);
-
+        if(!isset($_SESSION)){
+            session_start();
+        }
         //check for correct user
         if($_SESSION["name"] == null ){
             return redirect('/')->with('error','Unauthorized Accesss');

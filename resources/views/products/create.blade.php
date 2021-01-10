@@ -1,7 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Create Post</h1>
+<a href="/lsp/public/products" class="btn btn-light"><span uk-icon="reply"></span> Go Back</a>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card ">
+                <div class="card-header text-center">New Product</div>
+
+                <div class="card-body">
+
     {!! Form::open(['action'=> 'ProductsController@store' , 'method' => 'POST', 'enctype'=>'multipart/form-data']) !!}
     <div class="form-group">
         {{Form::label('image','Product Image :')}}
@@ -30,4 +39,9 @@
 
         {{Form::submit('Submit' , ['class' =>'btn btn-primary'])}}
     {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

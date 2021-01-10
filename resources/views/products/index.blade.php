@@ -10,16 +10,16 @@
 
                 <div class="card-body">
 
-                    <div class="col-md-6 text-center">
+                    <div class="col-md-10 text-center">
                         <form class="input-group input-group-default mb-3" type="get" action="{{ url('/searched') }}">
-                            <input class="form-control me-2" name="query" type="search" placeholder="Search" aria-label="Search">&nbsp
+                            <input class="form-control me-2" name="query" type="search" placeholder="Search" aria-label="Search">&nbsp;
                             <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
-                    </div>
 
-                <div class="col-md-4 bg-light text-right">
-                <a href="/lsp/public/products/create" class="btn btn-light" ><span uk-icon="plus-circle"></span> New Product</a><br><br>
-                </div>
+                    </div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="/lsp/public/products/create" class="btn btn-light" ><span uk-icon="plus-circle"></span> New Product</a>
+                    </div><br>
 
     @if(count($products) > 0)
     <table class="table table-striped table-hover table-bordered align-middle center">

@@ -3,7 +3,13 @@
 @section('content')
     <a href="/lsp/public/products" class="btn btn-light"><span uk-icon="reply"></span> Go Back</a>
     <br><br>
-    <h3 class="text-center">{{$products->p_name}}</h3>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card ">
+                    <div class="card-header text-center">{{$products->p_name}}</div>
+
+                    <div class="card-body">
     <img style="width:5cm;height:5cm;" class="rounded mx-auto d-block " src="/lsp/public/storage/product_image/{{$products->p_image}}">
     <br><br>
     <table class="table table-striped table-hover table-bordered">
@@ -41,6 +47,7 @@
                 <td>{{$products->updated_at}}</td>
             </tr>
     </table>
+
     <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-2">
@@ -51,6 +58,11 @@
             {{Form::hidden('_method','DELETE')}}
             {{Form::button('<i uk-icon="trash"></i> Delete',['class' => 'btn btn-danger', 'type' => 'submit'])}}
             {!!Form::close()!!}
+            </div>
+        </div>
+    </div>
+                     </div>
+                </div>
             </div>
         </div>
     </div>

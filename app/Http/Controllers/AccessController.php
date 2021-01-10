@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
-use Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 
@@ -43,14 +42,13 @@ class AccessController extends Controller
             {
                 session_start();
                 $_SESSION["name"]=$users->name;
-                $_SESSION["uuid"]=$users->uuid;
             // validation successful
-            return Redirect ('/');
+            return redirect ('/');
             }
             else
             {
             // validation not successful, send back to form
-            return Redirect ('/login');
+            return Redirect ('/login')->with('error','Wrong Credentials, Please try again');
             }
           }
         }
