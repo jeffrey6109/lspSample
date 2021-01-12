@@ -38,9 +38,9 @@
         body {
             background-image: url('storage/background/background.jpg');
             background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            height: 100%;
+            background-repeat: repeat;
+            background-size:auto;
+            height:100%;
         }
     </style>
 </head>
@@ -52,6 +52,6 @@
             @include('inc.messages')
             @yield('content')
         </div>
-    </div>
+    </div><br><br>
 </body>
 </html>
