@@ -120,13 +120,7 @@ class ProductsController extends Controller
      */
     public function show($p_id)
     {
-         //check for correct user
-        if($_SESSION["name"] == null ){
-        return redirect('/')->with('error','Unauthorized Accesss');
-        }
-
-        $products =  Product::find($p_id);
-        return view('products.show')->with('products',$products);
+       //
     }
 
     /**

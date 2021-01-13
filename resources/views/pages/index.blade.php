@@ -4,7 +4,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-30">
             <div class="card">
                 <div class="card-header text-center">Catalog</div>
 
@@ -17,7 +17,7 @@
                         </form>
                     </div>
         @if(count($products) > 0)
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-bordered table-hover text-center">
             <tr>
                 <th>Product Image</th>
                 <th>Serial No</th>
@@ -36,8 +36,9 @@
                 <td>{{$product->p_discount}} %</td>
                 @if($product->p_discount >0)
                 <td>{{$product->p_sold_price-(($product->p_sold_price * $product->p_discount)/100)}}</td>
+                @else
+                <td>{{$product->p_sold_price}}</td>
                 @endif
-
             </tr>
             @endforeach
         </table>
