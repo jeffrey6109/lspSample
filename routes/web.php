@@ -18,8 +18,9 @@ Route::get('/searched','PagesController@searched');
 
 Route::get('/records','PagesController@log');
 
-Route::get('/products/{p_id}/add','PagesController@add');
 Route::post('/products/{p_id}/added','PagesController@added');
+
+Route::post('/{p_id}/sold','PagesController@minus');
 
 Route::resource('products','ProductsController');
 

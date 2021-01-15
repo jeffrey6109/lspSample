@@ -25,6 +25,7 @@
                 <th>Quantity</th>
                 <th>Discount(%)</th>
                 <th>Price(RM)</th>
+                <th>Action</th>
 
             </tr>
             @foreach($products as $product)
@@ -39,6 +40,57 @@
                 @else
                 <td>{{$product->p_sold_price}}</td>
                 @endif
+
+                <td><!--- Product sold --->
+                    <button href="#" data-toggle="modal" data-target="#view_{{$product->p_id}}" class="btn btn-outline-info"><i class="glyphicon glyphicon-eye-open"></i><span uk-icon="credit-card"></span> Sold/export</button>
+                    <div class="modal fade" id="view_{{$product->p_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">Sold Product</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            {!! Form::open(['action'=> ['PagesController@minus', $product->p_id] , 'method' => 'POST','enctype'=>'multipart/form-data']) !!}
+
+                                             <div class="form-group">
+                                             {{Form::label('serial_no', 'Serial no :')}}
+                                             {{Form::text('serial_no', $product->p_serial_no,['class'=>'form-control','readonly'])}}
+                                             </div>
+                                            <div class="form-group">
+                                            {{Form::label('name', 'Product Name :')}}
+                                            {{Form::text('name', $product->p_name,['class'=>'form-control','placeholder' => 'Product name','readonly'])}}
+                                            </div>
+                                            <div class="form-group">
+                                            {{Form::label('quantity', 'Product Quantity :')}}
+                                            {{Form::number('quantity','0', ['class'=>'form-control','min'=>'0','max'=>'500'])}}
+                                            </div>
+                                            <div class="form-group">
+                                            {{Form::label('sold_price', 'Sold Price(RM/Per) :')}}
+                                            {{Form::text('sold_price','', ['class'=>'form-control','placeholder' => 'example 500 or 5.00'])}}
+                                            </div>
+
+                                            <div class="form-group">
+                                            {{Form::submit('Submit' , ['class' =>'btn btn-outline-primary'])}}
+                                            </div>
+
+                                            <div class="form-group">
+                                                <button type="button" class="btn btn-outline-danger" data-dismiss="modal"> Cancel</button>
+                                            </div>
+
+                                            {!! Form::close() !!}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                </td>
             </tr>
             @endforeach
         </table>

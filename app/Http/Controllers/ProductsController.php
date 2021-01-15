@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Log;
+use App\Transaction;
 session_start();
 class ProductsController extends Controller
 {
@@ -84,28 +85,48 @@ class ProductsController extends Controller
 		$uuid= substr($charid,1,16);
         $quantity =$request->input('quantity');
         $purchase_price = $request->input('purchase_price');
+        $p_uuid= $uuid;
+        $l_uuid= $uuid;
 
         //create post
 
         $product = new Product;
-        $product->p_serial_no = $uuid;
+        $product->p_serial_no = $p_uuid;
         $product->p_name = $request->input('name');
         $product->p_quantity = $quantity;
         $product->p_purchase_price = $purchase_price;
         $product->p_sold_price = $request->input('sold_price');
-        $product->p_total_purchase = $quantity * $purchase_price;
         $product->p_discount = $request->input('discount');
         $product->p_image = $fileNameToStore;
         $product->save();
 
+        //operation log
         $log = new Log;
         $log->l_p_serial_number = $uuid;
         $log->l_p_name = $request->input('name');
         $log->l_action = 'New';
         $log->l_quantity = $quantity;
         $log->l_purchase_price = $purchase_price;
-        $log->l_amount = $quantity * $purchase_price;
+        $log->l_total_purchase = $quantity * $purchase_price;
         $log->save();
+
+        //transaction log
+        $transaction = new Transaction;
+        $last_r = $transaction->latest('created_at')->where('action','Purchase')->first();
+
+        $transaction->uuid = $l_uuid;
+        $transaction->p_serial_no = $p_uuid;
+        $transaction->p_name = $request->input('name');
+        $transaction->quantity = $quantity;
+        $transaction->credit = $quantity * $purchase_price;
+        if(isset($last_r)){
+            $transaction->total_purchase = $last_r->total_purchase + ($quantity * $purchase_price);
+        }else{
+            $transaction->total_purchase = $quantity * $purchase_price;
+        }
+        $transaction->discount = $request->input('discount');
+        $transaction->action = 'New';
+        $transaction->save();
 
 
         return redirect('/products')->with('success','Product added');
@@ -205,7 +226,7 @@ class ProductsController extends Controller
         $log->l_action = 'Update';
         $log->l_quantity = $quantity;
         $log->l_purchase_price = $purchase_price;
-        $log->l_amount = $quantity * $purchase_price;
+        $log->l_total_purchase = $quantity * $purchase_price;
         $log->save();
 
 
@@ -229,16 +250,18 @@ class ProductsController extends Controller
 
         if($product->p_image != 'noimage.jpg'){
             //Delete image
-            Storage::delete('/public/storage/product_image/'.$product->p_image);
+            Storage::delete('storage/product_image/'.$product->p_image);
         }
 
         $log = new Log;
         $log->l_p_serial_number = $product->p_serial_no;
         $log->l_p_name = $product->p_name;
         $log->l_action = 'Delete';
-        $log->l_quantity = 0;
-        $log->l_purchase_price = 0;
-        $log->l_amount = 0;
+        $log->l_quantity = null;
+        $log->l_purchase_price = null;
+        $log->l_purchase_price = null;
+        $log->l_sold_price = null;
+        $log->l_total_sold = null;
         $log->save();
 
 

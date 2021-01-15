@@ -36,6 +36,8 @@
                 <td style="background-color: rgb(130, 158, 243)">{{$logs->l_action}}</td>
                 @elseif($logs->l_action = 'Delete')
                 <td style="background-color: lightcoral">{{$logs->l_action}}</td>
+                @else
+                <td style="background-color: skyblue">{{$logs->l_action}}</td>
                 @endif
 
                 <td>{{$logs->l_quantity}}</td>
