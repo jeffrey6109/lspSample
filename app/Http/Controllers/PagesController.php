@@ -140,6 +140,19 @@ class PagesController extends Controller
 
     }
 
+    public function ledger()
+    {
+         //check for correct user
+         session_start();
+         if($_SESSION["name"] == null ){
+            return redirect('/')->with('error','Unauthorized Accesss');
+        }
+
+        $ledger = Transaction::orderBy('created_at','asc')->paginate(20);
+        return view('logs.ledger')->with('ledger', $ledger);
+
+    }
+
     public function search(){
         $search_text = $_GET['query'];
         $products = Product::where('p_name','LIKE', '%'.$search_text.'%')->get();

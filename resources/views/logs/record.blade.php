@@ -49,7 +49,7 @@
             @endforeach
         </table>
         @else
-        <p>You have no product to display</p>
+        <p>You have no log to display</p>
         @endif
                 </div>
             </div>

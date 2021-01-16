@@ -41,6 +41,7 @@
             background-repeat: repeat;
             background-size:auto;
             height:100%;
+            zoom: 110%;
         }
     </style>
 </head>
