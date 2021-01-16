@@ -12,7 +12,6 @@
         @if(count($log) > 0)
         <table class="table table-striped table-hover table-bordered">
             <tr>
-                <th>#</th>
                 <th>Product Serial No</th>
                 <th>Product Name</th>
                 <th>Quantity</th>
@@ -23,6 +22,7 @@
 
             </tr>
             <tr>
+
                 <td>{{$ledger->uuid}}</td>
 
                 <td>{{$ledger->l_p_serial_no}}</td>
