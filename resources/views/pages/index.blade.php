@@ -25,7 +25,9 @@
                 <th>Quantity</th>
                 <th>Discount(%)</th>
                 <th>Price(RM)</th>
+                @if(isset($_SESSION["name"]))
                 <th>Action</th>
+                @endif
 
             </tr>
             @foreach($products as $product)
@@ -41,6 +43,7 @@
                 <td>{{$product->p_sold_price}}</td>
                 @endif
 
+                @if(isset($_SESSION["name"]))
                 <td><!--- Product sold --->
                     <button href="#" data-toggle="modal" data-target="#view_{{$product->p_id}}" class="btn btn-outline-info"><i class="glyphicon glyphicon-eye-open"></i><span uk-icon="credit-card"></span> Sold/export</button>
                     <div class="modal fade" id="view_{{$product->p_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -91,6 +94,7 @@
                             </div>
                         </div>
                 </td>
+                @endif
             </tr>
             @endforeach
         </table>
