@@ -40,8 +40,8 @@
             background-position: center;
             background-repeat: repeat;
             background-size:auto;
-            height:100%;
-            zoom: 110%;
+            height:100vh;
+            width: 100vw;
         }
     </style>
 </head>
