@@ -53,6 +53,6 @@
             @include('inc.messages')
             @yield('content')
         </div>
-    </div><br><br>
+    </div>
 </body>
 </html>
